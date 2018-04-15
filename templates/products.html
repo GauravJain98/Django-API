@@ -1,0 +1,46 @@
+{% extends "base.html" %} {% block content %}
+<div class="row">
+    {% for product in products %}
+    {% if product.quantity != 0 %}
+    <div class="card col-md-3 col-lg-2 col-xs-5 col-sm-5 bg-secondary text-dark m-3">
+        <div class="card-body">
+            <img class="w-100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHcAAAB3CAMAAAAO5y+4AAAAPFBMVEWVlZX////IyMja2tqqqqqSkpLR0dGPj4+4uLjExMSgoKClpaXz8/PLy8v8/Pze3t7m5uawsLDs7OyJiYlg8ag2AAACn0lEQVRoge2Y69KjIAxALbdwR9j3f9fFe1Hp16nYb3Y255/S4ZCYxKldhyAIgiAIgiAIgiBvwTkHvl1Bvr5bB1moWZROwnI3OhmZ7sa1pgdYdCZKQvtk/WNAL4rx0tvU03wA0+wAWjPpwqpbSdPO0Je35wOwfIArgHvUEPB6ncKPu7/CVjfOj5iz6qq/ZH2180ND56uL8eITBlLd2vK+uiauZbk7Vs5GEvti25auWnOm9XFzm4JieWXo5JBO5KZBI4MslUKaoUnzzpoxZkyWk5CK+iOXszyKw7iZt/2gHKbCvDB4R4zJQ0XRpcn7Jtos9ja4Ull6FzmTSvT20bUZlyCtMADHzUrv7JbUyxbxchDjcxXsoN57szT4qYsuRwxdWktKmD/FhoXX6Bzp1kcXQ4ZYdIl1+kmtn6Wi+KGPl8Qnc98qs5j1ml5xHOPuglifz6qk9Kie+jeeSMdu+vhVyGXtbeST1ACamUjOxtWUGPlxcfFOVd+DvpeM9NUXklWXuhhemB/111G2Xu1h4DVzcqFm5S0mBwA91VKhziL2AhrNZ67o8UFaSgU5psIH8nk9HbyB7s2eDl5CdneDIo29OzOdva44Cxlo7X0294uXrM/eTtY7vJTOUyLR1TvXlg2E3OidYrZ08xKVCutd3hzzrJ29hKRn633elcWryO94CXrRi170/u9eFk7Fp17nWCPt8MnuNOIzr5ON/v3OZiaO5qPXKd3SOog7SffmvdeR2DTY2axJeOl1snWwi5mVIYsy2BYfjyrirqgvUQR7Q4o3wDzV1+ZtX09Hc1yTvXmvfgV9B94t9SW+kuKNJdniSyle4VwOk3P8fxS/JZ3M2oUgvpfiTcwjpYp92Tqa9R1T8S3zr1gRBEEQBEEQBEGQf5m/Rr4l3SFguPAAAAAASUVORK5CYII=">
+            <h5 class="card-title">{{product.name}}</h5>
+            <h6 class="card-subtitle mb-2 ">{{product.typeOf}}</h6>
+            <p class="card-text">{{product.description|truncatechars:50 }}</p>
+            <div class="row">
+                <h3 class="col-md-12 text-center">Price:{{product.price}}</h3>
+                <a class="btn btn-light offset-md-4 col-md-4" data-toggle="modal" data-target="#{{product.id}}Modal">Buy</a>
+            </div>
+            <h10>{{product.quantity}} items left</h10>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="modal fade" id="{{product.id}}Modal" tabindex="-1" role="dialog" aria-labelledby="{{product.id}}ModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="bg-dark modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="{{product.id}}ModalLabel">{{product.name}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="POST" action="/products/{{product.id}}">
+                    <div class="modal-body">
+                        {% csrf_token %}
+                        <label for="quantity{{product.id}}">Quantity</label>
+                        <input name="quantity{{product.id}}" type="number" step="1" pattern="\d+" />
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>{% endblock %}
