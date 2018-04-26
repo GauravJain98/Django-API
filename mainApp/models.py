@@ -13,10 +13,6 @@ productType = (
 
 class Product(models.Model):
     name = models.CharField(max_length=20,null=False)
-    quantity = models.IntegerField()
-    description = models.TextField(default = de)
-    typeOf = models.CharField(max_length=20,choices = productType,default="None") 
-    price = models.IntegerField(default  = 20)
     def __str__(self):
         return self.name
 
@@ -39,9 +35,7 @@ class InCart(models.Model):
         null = False,
         blank = False,
     )
-    name = models.CharField(max_length=20,null=False)
     price = models.IntegerField(default=  0)
-    quantity = models.IntegerField(default = 0)
     def __str__(self):
         return str(self.id)
 
