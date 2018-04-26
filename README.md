@@ -6,9 +6,7 @@ python3 -m venv myvenv
 
 source myvenv/Script/activate 
 
-pip install django
-
-pip install djangorestframework
+pip install django djangorestframework
 
 python3 manage.py runserver
 
