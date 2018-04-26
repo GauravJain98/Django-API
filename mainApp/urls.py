@@ -9,7 +9,6 @@ from django.contrib.auth.views import login,logout
 urlpatterns = [
     url(r'^setup/', views.setup),
     url(r'^bill/', views.bill),
-    url(r'^products/(?P<id>[-\w]+)', views.addProduct),
     url(r'^products/', views.product),
     url(r'^register/', views.register),
     url(r'^cart/', views.bill),
