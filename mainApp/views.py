@@ -11,14 +11,9 @@ class ProductSerializer(serializers.ModelSerializer):
         model= Product
         fields = ('id','quantity')
 
-class ProductView(viewsets.ModelViewSet):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer        
-    
-"""
+
 @api_view(['GET'])
 def product(request):
     p = Product.objects.all()
     s = ProductSerializer(p,many=True)
     return Response(s.data)
-"""
