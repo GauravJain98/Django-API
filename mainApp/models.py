@@ -6,26 +6,3 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
-class Cart(models.Model):
-    user = models.OneToOneField(
-        User,
-        on_delete = models.CASCADE,
-        null = False,
-        blank = False,
-    )
-    amount = models.IntegerField(default = 0)
-    def __str__(self):
-        return str(self.amount)
-
-
-class InCart(models.Model):
-    cart = models.ForeignKey(
-        Cart,
-        on_delete = models.CASCADE,
-        null = False,
-        blank = False,
-    )
-    price = models.IntegerField(default=  0)
-    def __str__(self):
-        return str(self.id)
-
