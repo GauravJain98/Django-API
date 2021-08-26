@@ -7,11 +7,3 @@ class ProductAdmin(admin.ModelAdmin):
     list_display =('id','name',)
 
 admin.site.register(Product,ProductAdmin)
-
-
-class CartAdmin(admin.ModelAdmin):
-    list_display =('amount',)
-
-admin.site.register(Cart,CartAdmin)
-
-admin.site.register(InCart)
